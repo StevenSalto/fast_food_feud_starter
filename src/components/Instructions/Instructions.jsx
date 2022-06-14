@@ -4,7 +4,11 @@ import "./Instructions.css"
 export function Instructions(props) {
   return (
     <aside className="instructions">
-      <p></p>
+      <p>{
+      //for (const prop in obj) {
+        props.instructions.instructions['start']
+        }
+      </p>
     </aside>
   )
 }
