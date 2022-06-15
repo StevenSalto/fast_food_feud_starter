@@ -40,7 +40,27 @@ export function App() {
   const setCurrentMenuItem = (menItem) => {
     setMenuItem(menItem);
   } 
-
+  function determineInstruction() {
+    let inst = appInfo.instructions.start;
+    console.log(inst)
+    if(category!=''){
+      if(restaurant!=''){
+        if(menuItem!=''){
+          inst = appInfo.instructions.allSelected;
+        }else{
+          inst = appInfo.instructions.noSelectedItem;
+        }
+      }else{
+        inst = appInfo.instructions.onlyCategory;
+      }
+    }else{
+      if(restaurant!=''){
+        inst = appInfo.instructions.onlyRestaurant;
+      }
+    }
+    console.log(inst)
+    return inst;
+  }
   var currentMenuItems = data.filter((elem) => {return (elem.food_category == category) && (elem.restaurant == restaurant)})
   return (
     <main className="App">
@@ -50,7 +70,7 @@ export function App() {
           <h2 className="title">Categories</h2>
           {
           categories.map((cat) => (
-          <Chip label={cat} isActive={(cat==category ? true:false)} onclickFunc={(e)=>{
+          <Chip label={cat} isActive={(cat==category ? true:false)} onclickFunc={()=>{
             setCurrentCategory(cat);
           }}/>
           ))}
@@ -66,13 +86,13 @@ export function App() {
           <h2 className="title">Restaurants</h2>
           <div className="restaurants options">{
           restaurants.map((rest) => (
-          <Chip label={rest} isActive={(rest == restaurant ? true:false)} onclickFunc={(e)=>{
+          <Chip label={rest} isActive={(rest == restaurant ? true:false)} onclickFunc={()=>{
             setCurrentRestaurant(rest);
           }}/>))}
           </div>
         </div>
-
-      {<Instructions start={appInfo.instructions.start} onlyCategory={appInfo.instructions.onlyCategory} onlyRestaurant={appInfo.instructions.onlyRestaurant} noSelectedItem={appInfo.instructions.noSelectedItem} allSelected={appInfo.instructions.allSelected}/>}
+        
+        {<Instructions instructions={determineInstruction()}/>}
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
@@ -80,7 +100,7 @@ export function App() {
             <h2 className="title">Menu Items</h2>
             {
             currentMenuItems.map(
-              (item) => (<Chip label={item.item_name} onclickFunc={() => {
+              (item) => (<Chip label={item.item_name} isActive={(item==menuItem ? true:false)} onclickFunc={() => {
                 setCurrentMenuItem(item);
               }}/>))
             }

@@ -5,7 +5,7 @@ export function Instructions(props) {
   return (
     <aside className="instructions">
       <p>{
-        props.start
+        props.instructions
         }
       </p>
     </aside>
