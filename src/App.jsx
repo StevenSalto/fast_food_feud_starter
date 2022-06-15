@@ -42,7 +42,6 @@ export function App() {
   } 
   function determineInstruction() {
     let inst = appInfo.instructions.start;
-    console.log(inst)
     if(category!=''){
       if(restaurant!=''){
         if(menuItem!=''){
@@ -58,7 +57,6 @@ export function App() {
         inst = appInfo.instructions.onlyRestaurant;
       }
     }
-    console.log(inst)
     return inst;
   }
   var currentMenuItems = data.filter((elem) => {return (elem.food_category == category) && (elem.restaurant == restaurant)})
@@ -70,9 +68,9 @@ export function App() {
           <h2 className="title">Categories</h2>
           {
           categories.map((cat) => (
-          <Chip label={cat} isActive={(cat==category ? true:false)} onclickFunc={()=>{
+          <Chip label={cat} isActive={(cat==category ? true:false)} onclickFunc={() => {
             setCurrentCategory(cat);
-          }}/>
+          }} oncloseFunc={() => {setCurrentCategory(cat="")}}/>
           ))}
         </div>
       </div>
@@ -88,7 +86,7 @@ export function App() {
           restaurants.map((rest) => (
           <Chip label={rest} isActive={(rest == restaurant ? true:false)} onclickFunc={()=>{
             setCurrentRestaurant(rest);
-          }}/>))}
+          }} oncloseFunc={() => {setCurrentRestaurant(rest="")}}/>))}
           </div>
         </div>
         
@@ -102,7 +100,7 @@ export function App() {
             currentMenuItems.map(
               (item) => (<Chip label={item.item_name} isActive={(item==menuItem ? true:false)} onclickFunc={() => {
                 setCurrentMenuItem(item);
-              }}/>))
+              }} oncloseFunc={() => {setCurrentMenuItem(item="")}}/>))
             }
           </div>
 
