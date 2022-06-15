@@ -59,7 +59,7 @@ export function App() {
 
       {/* MAIN COLUMN */}
       <div className="container">
-        {<Header header={appInfo} />}
+        {<Header title={appInfo.title} tagline={appInfo.tagline} description={appInfo.description} />}
 
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
@@ -72,7 +72,7 @@ export function App() {
           </div>
         </div>
 
-        {<Instructions instructions={appInfo} />}
+      {<Instructions start={appInfo.instructions.start} onlyCategory={appInfo.instructions.onlyCategory} onlyRestaurant={appInfo.instructions.onlyRestaurant} noSelectedItem={appInfo.instructions.noSelectedItem} allSelected={appInfo.instructions.allSelected}/>}
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">

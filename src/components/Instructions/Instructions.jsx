@@ -5,8 +5,7 @@ export function Instructions(props) {
   return (
     <aside className="instructions">
       <p>{
-      //for (const prop in obj) {
-        props.instructions.instructions['start']
+        props.start
         }
       </p>
     </aside>
